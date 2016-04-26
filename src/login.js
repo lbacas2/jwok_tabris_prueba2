@@ -1,6 +1,6 @@
 
 var MARGIN = 16;
-var MARGIN_LARGE = 50;
+var MARGIN_LARGE = 32;
 
 
 var page = new tabris.Page({
@@ -11,7 +11,7 @@ var page = new tabris.Page({
 
 var logoImage = new tabris.ImageView({
   image: getImage(0),
-  layoutData: {top: MARGIN, width: 200, height: 200, centerX: 0},
+  layoutData: {top: MARGIN, width: 150, height: 150, centerX: 0},
   scaleMode: 'fit'
 }).appendTo(page);
 
@@ -46,10 +46,17 @@ var button = new tabris.Button({
 }).appendTo(page);
 
 button.on("select", function() {
-  page.children("TextInput").apply({visible: false});
-  page.children("TextView").apply({visible: false});
-  page.children("Button").apply({visible: false});
-  userText.set("text", "Ok!");
+  page.apply({
+		"TextInput": {visible: false},
+		"TextView": {visible: false},
+		"Button": {visible: false}
+  });
+  userLabel.set("text", "Ok!");
+  userLabel.set("visible", true);
 });
+
+function getImage(index) {
+  return index === 0 ? {src: "src/images/salad.jpg", scale: 3} :  {src: "src/images/landscape.jpg", scale: 3};
+}
 
 page.open();
